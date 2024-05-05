@@ -5,21 +5,35 @@ import company.interfaces.Messenger;
 import company.utils.MathUtils;
 public class Main {
     public static void main(String[] args) {
+        Person[] people = new Person[5]; 
+        final int b = 10; 
+        
+
         try {
-            Person person = new Person("Emma", 35);
-            System.out.println("Person: " + person.getName() + ", Age: " + person.getAge());
-            
-            int num1 = 15;
-            int num2 = 7;
-            int sum = MathUtils.add(num1, num2);
+            people[0] = new Person("Jan Kowal", 30);
+            people[1] = new Person("Mike Wazowski", 25);
+            people[2] = new Person("Bob Nowak", 40);
+            people[3] = new Person("Emma Stone", 35);
+            people[4] = new Person("Michał Nowicki", 45);
 
-            System.out.println("Sum of " + num1 + " and " + num2 + " is: " + sum);
+            for (Person person : people) {
+                if (person != null) { 
+                    int age = person.getAge();
+                    int value = MathUtils.add(age, b);
+                    String message = person.getName() + " age value: " + value;
+                    
+                    EmailMessenger emailMessenger = new EmailMessenger();
+                    emailMessenger.sendMessage(message);
+                }
+            }
 
-            EmailMessenger emailMessenger = new EmailMessenger();
-            String message = "The sum of " + num1 + " and " + num2 + " is: " + sum;
-            emailMessenger.sendMessage(message); }
+
+        }
+
         
-        
+
+
+
         catch (InvalidAgeException e) {
             System.out.println("Invalid age: " + e.getMessage());
         }
